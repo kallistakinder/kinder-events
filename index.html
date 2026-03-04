@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kinder Upcoming Events</title>
+
+    <!-- Libraries (CDN) -->
+    <!-- iCal parser -->
+    <script src="https://cdn.jsdelivr.net/npm/ical.js@1.4.0/build/ical.min.js"></script>
+    <!-- QR code generator -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <style>
+      :root{
+        --bg1:#1f6f6b;         /* teal-green */
+        --bg2:#d5a34d;         /* warm gold */
+        --card:#f6f2ea;        /* creamy */
+        --ink:#13202a;
+        --muted:#4d5b66;
+        --accent:#b64a3a;      /* warm red */
+        --accent2:#3d6fb6;     /* blue */
+        --shadow: 0 10px 30px rgba(0,0,0,.18);
+        --radius: 18px;
+      }
+
+      *{box-sizing:border-box}
+      body{
+        margin:0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+        color:var(--ink);
+        background:
+          radial-gradient(1100px 700px at 20% 10%, rgba(255,255,255,.10), transparent 60%),
+          radial-gradient(900px 600px at 90% 40%, rgba(255,255,255,.10), transparent 55%),
+          linear-gradient(160deg, var(--bg1) 0%, var(--bg1) 35%, var(--bg2) 100%);
+        min-height:100vh;
+        padding:24px;
+      }
+
+      .page{
+        max-width: 860px;
+        margin: 0 auto;
+      }
+
+      .sheet{
+        background: rgba(255,255,255,.06);
+        border: 1px solid rgba(255,255,255,.18);
+        border-radius: 24px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(6px);
+      }
+
+      header{
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap:18px;
+      }
+
+      .brand{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+      }
+
+      .badge{
+        display:inline-flex;
+        align-items:center;
+        gap:10px;
+        padding:10px 14px;
+        border-radius: 999px;
+        background: rgba(0,0,0,.18);
+        color: rgba(255,255,255,.92);
+        font-weight:700;
+        letter-spacing:.3px;
+        width: fit-content;
+      }
+
+      .titleBox{
+        background: var(--card);
+        border-radius: 20px;
+        padding: 14px 18px;
+        box-shadow: 0 8px 18px rgba(0,0,0,.18);
+        border: 1px solid rgba(0,0,0,.06);
+      }
+      h1{
+        margin:0;
+        font-size: 34px;
+        line-height: 1.05;
+        letter-spacing: -0.6px;
+      }
+      .subtitle{
+        margin:6px 0 0;
+        color: var(--muted);
+        font-weight:600;
+      }
+
+      .qrWrap{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:8px;
+        padding: 10px 12px;
+        border-radius: 18px;
+        background: rgba(255,255,255,.14);
+        border: 1px solid rgba(255,255,255,.22);
+        min-width: 140px;
+      }
+      #qr{
+        width:110px;
+        height:110px;
+        background:white;
+        padding:8px;
+        border-radius: 12px;
+      }
+      .qrText{
+        font-size: 12px;
+        color: rgba(255,255,255,.95);
+        text-align:center;
+        font-weight:700;
+        line-height:1.15;
+      }
+
+      .sectionTitle{
+        margin:18px 0 10px;
+        padding: 10px 14px;
+        border-radius: 16px;
+        background: rgba(255,255,255,.16);
+        color: rgba(255,255,255,.92);
+        font-weight:800;
+        letter-spacing:.5px;
+        text-transform: uppercase;
+        font-size: 13px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+      }
+
+      .controls{
+        display:flex;
+        gap:8px;
+        flex-wrap: wrap;
+      }
+
+      button{
+        border:0;
+        border-radius: 999px;
+        padding: 10px 12px;
+        font-weight:800;
+        cursor:pointer;
+        background: rgba(255,255,255,.92);
+        color: var(--ink);
+        box-shadow: 0 6px 14px rgba(0,0,0,.18);
+      }
+      button.secondary{
+        background: rgba(0,0,0,.18);
+        color: rgba(255,255,255,.92);
+        border: 1px solid rgba(255,255,255,.25);
+        box-shadow: none;
+      }
+      button:disabled{
+        opacity:.5;
+        cursor:not-allowed;
+      }
+
+      .list{
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+      }
+
+      .eventCard{
+        display:flex;
+        gap:14px;
+        align-items:stretch;
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 12px 14px;
+        border: 1px solid rgba(0,0,0,.06);
+        box-shadow: 0 10px 22px rgba(0,0,0,.12);
+      }
+
+      .datePill{
+        width:92px;
+        flex: 0 0 92px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(61,111,182,.18), rgba(61,111,182,.06));
+        border: 1px solid rgba(61,111,182,.22);
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        padding: 10px 8px;
+        text-align:center;
+      }
+
+      .mon{
+        font-weight:900;
+        letter-spacing: 2px;
+        font-size: 12px;
+        color: var(--accent2);
+      }
+      .day{
+        font-weight:950;
+        font-size: 34px;
+        line-height: 1;
+        margin-top: 3px;
+      }
+      .time{
+        margin-top: 6px;
+        font-weight:800;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .eventMain{
+        flex:1;
+        min-width: 0;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+      }
+      .eventTitle{
+        margin:0;
+        font-size: 20px;
+        font-weight:950;
+        letter-spacing: -0.2px;
+      }
+      .eventDesc{
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-weight:650;
+        overflow:hidden;
+        display:-webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+
+      .metaRow{
+        margin-top: 8px;
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        align-items:center;
+        color: var(--muted);
+        font-weight:700;
+        font-size: 12px;
+      }
+      .chip{
+        background: rgba(0,0,0,.06);
+        border: 1px solid rgba(0,0,0,.06);
+        padding: 6px 10px;
+        border-radius: 999px;
+      }
+      .chip.urgent{
+        background: rgba(182,74,58,.10);
+        border-color: rgba(182,74,58,.18);
+        color: #7d2f24;
+      }
+
+      .status{
+        margin-top: 12px;
+        color: rgba(255,255,255,.92);
+        font-weight:800;
+        font-size: 13px;
+        display:flex;
+        justify-content:space-between;
+        gap:10px;
+        flex-wrap:wrap;
+      }
+
+      a.link{
+        color: rgba(255,255,255,.95);
+        text-decoration: underline;
+        font-weight:900;
+      }
+
+      /* Print: A5 friendly */
+      @media print {
+        body{
+          background: white;
+          padding: 0;
+        }
+        .sheet{
+          box-shadow:none;
+          border:none;
+          backdrop-filter:none;
+          background: white;
+          padding: 0;
+        }
+        .sectionTitle, .status, .controls, button, .badge, .qrText a{
+          display:none !important;
+        }
+        .qrWrap{
+          background: transparent;
+          border:none;
+        }
+      }
+
+      /* Mobile tweaks */
+      @media (max-width: 560px){
+        header{flex-direction:column; align-items:stretch;}
+        .qrWrap{align-self:flex-end;}
+        .eventCard{flex-direction:row;}
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <div class="sheet">
+        <header>
+          <div class="brand">
+            <div class="badge">KINDER • EVENTS</div>
+            <div class="titleBox">
+              <h1 id="pageTitle">2026 Kinder Upcoming Events</h1>
+              <p class="subtitle" id="pageSubtitle">Live updates from our public calendar</p>
+            </div>
+          </div>
+
+          <div class="qrWrap">
+            <div id="qr" aria-label="QR code"></div>
+            <div class="qrText">
+              Subscribe<br />
+              <a class="link" id="subscribeLink" href="#" target="_blank" rel="noreferrer">Open calendar</a>
+            </div>
+          </div>
+        </header>
+
+        <div class="sectionTitle">
+          <span>Upcoming Event Dates</span>
+          <div class="controls">
+            <button class="secondary" id="prevBtn">Prev 5</button>
+            <button class="secondary" id="nextBtn">Next 5</button>
+            <button id="printBtn">Print</button>
+          </div>
+        </div>
+
+        <div class="list" id="events"></div>
+
+        <div class="status">
+          <span id="statusText">Loading events…</span>
+          <span>
+            Sharing link:
+            <a class="link" id="publicViewLink" href="#" target="_blank" rel="noreferrer">View online</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // =======================
+      // CONFIG (edit these)
+      // =======================
+      const PROXY_URL = "https://api.allorigins.win/raw?url=https://calendar.google.com/calendar/ical/e22b74f5b0b5b1bb2dba879d3eff483eeadbbb95ebb18bc9ef7656df891c6427%40group.calendar.google.com/public/basic.ics";
+      const SUBSCRIBE_URL =
+        "https://calendar.google.com/calendar/u/0/r?cid=e22b74f5b0b5b1bb2dba879d3eff483eeadbbb95ebb18bc9ef7656df891c6427@group.calendar.google.com";
+      const PAGE_TITLE = "Kallista Kinder Upcoming Events";
+      const PAGE_SUBTITLE = "Next events pulled live from our public calendar";
+
+      // Pagination
+      const PAGE_SIZE = 5;
+
+      // =======================
+      // App state
+      // =======================
+      let allEvents = [];
+      let pageIndex = 0;
+
+      // UI refs
+      const elEvents = document.getElementById("events");
+      const elStatus = document.getElementById("statusText");
+      const elPrev = document.getElementById("prevBtn");
+      const elNext = document.getElementById("nextBtn");
+
+      // Header links/text
+      document.getElementById("pageTitle").textContent = PAGE_TITLE;
+      document.getElementById("pageSubtitle").textContent = PAGE_SUBTITLE;
+
+      const subscribeA = document.getElementById("subscribeLink");
+      subscribeA.href = SUBSCRIBE_URL;
+
+      const publicViewA = document.getElementById("publicViewLink");
+      publicViewA.href = SUBSCRIBE_URL;
+
+      // QR code
+      new QRCode(document.getElementById("qr"), {
+        text: SUBSCRIBE_URL,
+        width: 110,
+        height: 110,
+        correctLevel: QRCode.CorrectLevel.M,
+      });
+
+      document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+      elPrev.addEventListener("click", () => {
+        if (pageIndex > 0) {
+          pageIndex--;
+          render();
+        }
+      });
+      elNext.addEventListener("click", () => {
+        const maxPage = Math.floor((allEvents.length - 1) / PAGE_SIZE);
+        if (pageIndex < maxPage) {
+          pageIndex++;
+          render();
+        }
+      });
+
+      // =======================
+      // Helpers
+      // =======================
+      function pad2(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      function formatMonthShort(d) {
+        return d.toLocaleString(undefined, { month: "short" }).toUpperCase();
+      }
+
+      function formatTime(d, isAllDay) {
+        if (isAllDay) return "All day";
+        return d.toLocaleString(undefined, { hour: "numeric", minute: "2-digit" });
+      }
+
+      function cleanText(s) {
+        return (s || "")
+          .replace(/\\n/g, "\n")
+          .replace(/\r/g, "")
+          .trim();
+      }
+
+      function isAllDayEvent(icalEvent) {
+        // If DTSTART is date-only (no time), ical.js marks it as "isDate"
+        const dt = icalEvent.startDate;
+        return !!(dt && dt.isDate);
+      }
+
+      // =======================
+      // Render
+      // =======================
+      function render() {
+        const start = pageIndex * PAGE_SIZE;
+        const slice = allEvents.slice(start, start + PAGE_SIZE);
+
+        elEvents.innerHTML = "";
+
+        if (!slice.length) {
+          elEvents.innerHTML = `<div class="eventCard"><div class="eventMain"><h3 class="eventTitle">No upcoming events found</h3><p class="eventDesc">Try adding events to the calendar or check your feed.</p></div></div>`;
+        }
+
+        for (const ev of slice) {
+          const mon = formatMonthShort(ev.start);
+          const day = ev.start.getDate();
+          const timeLabel = formatTime(ev.start, ev.allDay);
+
+          const desc = ev.description || "";
+          const loc = ev.location || "";
+
+          const card = document.createElement("div");
+          card.className = "eventCard";
+
+          card.innerHTML = `
+            <div class="datePill">
+              <div class="mon">${mon}</div>
+              <div class="day">${day}</div>
+              <div class="time">${timeLabel}</div>
+            </div>
+            <div class="eventMain">
+              <h3 class="eventTitle">${escapeHtml(ev.title)}</h3>
+              <p class="eventDesc">${escapeHtml(desc)}</p>
+              <div class="metaRow">
+                ${loc ? `<span class="chip">📍 ${escapeHtml(loc)}</span>` : ""}
+                <span class="chip">${escapeHtml(ev.dateRange)}</span>
+              </div>
+            </div>
+          `;
+
+          elEvents.appendChild(card);
+        }
+
+        const maxPage = Math.max(0, Math.floor((allEvents.length - 1) / PAGE_SIZE));
+        elPrev.disabled = pageIndex === 0;
+        elNext.disabled = pageIndex >= maxPage;
+
+        elStatus.textContent = allEvents.length
+          ? `Showing ${Math.min(start + 1, allEvents.length)}–${Math.min(start + PAGE_SIZE, allEvents.length)} of ${allEvents.length} upcoming events`
+          : "No upcoming events to show";
+      }
+
+      function escapeHtml(str) {
+        return (str || "").replace(/[&<>"']/g, (m) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        }[m]));
+      }
+
+      // =======================
+      // Load + parse ICS
+      // =======================
+      async function loadEvents() {
+        try {
+          elStatus.textContent = "Loading events…";
+
+          if (!PROXY_URL.includes("http")) {
+            throw new Error("Set PROXY_URL to your Cloudflare Worker URL.");
+          }
+
+          const res = await fetch(PROXY_URL, { cache: "no-store" });
+          if (!res.ok) throw new Error(`Proxy fetch failed: ${res.status}`);
+
+          const icsText = await res.text();
+
+          const jcal = ICAL.parse(icsText);
+          const comp = new ICAL.Component(jcal);
+          const vevents = comp.getAllSubcomponents("vevent") || [];
+
+          const now = new Date();
+          const upcoming = [];
+
+          for (const v of vevents) {
+            const e = new ICAL.Event(v);
+
+            // Handle recurring events: expand occurrences for next ~12 months (tweak if you want)
+            const iterator = e.iterator();
+            let next;
+            let safety = 0;
+
+            while ((next = iterator.next()) && safety++ < 500) {
+              const start = next.toJSDate();
+
+              // Only future (or today) events
+              if (start < new Date(now.getTime() - 24 * 60 * 60 * 1000)) continue;
+
+              // Stop expanding too far (12 months)
+              const limit = new Date(now);
+              limit.setMonth(limit.getMonth() + 12);
+              if (start > limit) break;
+
+              const details = e.getOccurrenceDetails(next);
+              const occEvent = details.item;
+
+              const allDay = isAllDayEvent(occEvent);
+
+              const end = details.endDate.toJSDate();
+              const title = cleanText(occEvent.summary);
+              const description = cleanText(occEvent.description);
+              const location = cleanText(occEvent.location);
+
+              const dateRange = buildDateRange(start, end, allDay);
+
+              upcoming.push({
+                start,
+                end,
+                title: title || "(Untitled event)",
+                description,
+                location,
+                allDay,
+                dateRange,
+              });
+
+              // If it’s not recurring, just take one
+              if (!e.isRecurring()) break;
+            }
+          }
+
+          // Sort by start date
+          upcoming.sort((a, b) => a.start - b.start);
+
+          allEvents = upcoming;
+          pageIndex = 0;
+          render();
+        } catch (err) {
+          console.error(err);
+          elStatus.textContent = "Couldn’t load events. Check PROXY_URL and calendar public access.";
+          elEvents.innerHTML = `
+            <div class="eventCard">
+              <div class="eventMain">
+                <h3 class="eventTitle">Couldn’t load events</h3>
+                <p class="eventDesc">${escapeHtml(String(err.message || err))}</p>
+                <p class="eventDesc">Make sure the calendar is public and the Worker URL is correct.</p>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      function buildDateRange(start, end, allDay) {
+        if (allDay) {
+          // All-day end in ICS is often next-day exclusive; show just start date
+          return start.toLocaleDateString(undefined, { weekday: "short", year: "numeric", month: "short", day: "numeric" });
+        }
+        const d = start.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+        const t1 = start.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+        const t2 = end.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+        return `${d} • ${t1}–${t2}`;
+      }
+
+      loadEvents();
+    </script>
+  </body>
+</html>
