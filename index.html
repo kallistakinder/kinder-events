@@ -526,8 +526,10 @@
   </div>
   <div class="eventMain">
     <h3 class="eventTitle">${escapeHtml(ev.title)}</h3>
-    <p class="eventDesc">${desc}</p>
-    ${desc ? `<div class="eventHint">Tap to read more</div>` : ""}
+            <div class="eventContent">
+              <div class="eventDesc">${desc}</div>
+            </div>
+            ${desc ? `<div class="eventHint">Tap to read more</div>` : ""}
     <div class="metaRow">
       ${loc ? `<span class="chip">📍 ${escapeHtml(loc)}</span>` : ""}
       <span class="chip">${escapeHtml(ev.dateRange)}</span>
