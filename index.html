@@ -252,6 +252,7 @@
   display:-webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  white-space: pre-wrap;
 }
 
 .eventCard.expanded .eventDesc{
@@ -472,8 +473,18 @@
       function cleanText(s) {
   if (!s) return "";
 
-  // Remove HTML tags like <p>, <strong>, etc
-  s = s.replace(/<[^>]*>/g, "");
+  // Convert block elements to newlines
+  s = s.replace(/<\/p>\s*<p>/g, "\n\n");  // paragraph breaks
+  s = s.replace(/<p>(?=[^<])/g, "");  // remove opening <p> tag
+  s = s.replace(/<\/p>/g, "");  // remove closing </p> tag
+  s = s.replace(/<br\s*\/?>/gi, "\n");  // convert <br> to newlines
+
+  // Remove unwanted tags but keep content: scripts, styles, etc
+  s = s.replace(/<script[^>]*>.*?<\/script>/gi, "");
+  s = s.replace(/<style[^>]*>.*?<\/style>/gi, "");
+
+  // Keep formatting tags: <strong>, <b>, <em>, <i>
+  // (they will be rendered as HTML)
 
   // Convert escaped line breaks
   s = s.replace(/\\n/g, "\n").replace(/\r/g, "");
@@ -519,7 +530,7 @@
   </div>
   <div class="eventMain">
     <h3 class="eventTitle">${escapeHtml(ev.title)}</h3>
-    <p class="eventDesc">${escapeHtml(desc)}</p>
+    <p class="eventDesc">${desc}</p>
     ${desc ? `<div class="eventHint">Tap to read more</div>` : ""}
     <div class="metaRow">
       ${loc ? `<span class="chip">📍 ${escapeHtml(loc)}</span>` : ""}
