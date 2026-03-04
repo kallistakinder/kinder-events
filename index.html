@@ -246,15 +246,32 @@
         font-weight:950;
         letter-spacing: -0.2px;
       }
-      .eventDesc{
-        margin: 5px 0 0;
-        color: var(--muted);
-        font-weight:650;
-        overflow:hidden;
-        display:-webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-      }
+      .eventCard { cursor: pointer; }
+
+.eventDesc{
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-weight:650;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.eventCard.expanded .eventDesc{
+  overflow: visible;
+  display: block;
+  -webkit-line-clamp: unset;
+  white-space: pre-wrap; /* keep line breaks from calendar */
+}
+
+.eventHint{
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent);
+  opacity: .9;
+}
 
       .metaRow{
         margin-top: 8px;
@@ -492,21 +509,29 @@
           card.className = "eventCard";
 
           card.innerHTML = `
-            <div class="datePill">
-              <div class="mon">${mon}</div>
-              <div class="day">${day}</div>
-              <div class="time">${timeLabel}</div>
-            </div>
-            <div class="eventMain">
-              <h3 class="eventTitle">${escapeHtml(ev.title)}</h3>
-              <p class="eventDesc">${escapeHtml(desc)}</p>
-              <div class="metaRow">
-                ${loc ? `<span class="chip">📍 ${escapeHtml(loc)}</span>` : ""}
-                <span class="chip">${escapeHtml(ev.dateRange)}</span>
-              </div>
-            </div>
-          `;
+  <div class="datePill">
+    <div class="mon">${mon}</div>
+    <div class="day">${day}</div>
+    <div class="time">${timeLabel}</div>
+  </div>
+  <div class="eventMain">
+    <h3 class="eventTitle">${escapeHtml(ev.title)}</h3>
+    <p class="eventDesc">${escapeHtml(desc)}</p>
+    ${desc ? `<div class="eventHint">Tap to read more</div>` : ""}
+    <div class="metaRow">
+      ${loc ? `<span class="chip">📍 ${escapeHtml(loc)}</span>` : ""}
+      <span class="chip">${escapeHtml(ev.dateRange)}</span>
+    </div>
+  </div>
+`;
+// Toggle expand/collapse on click (ignore clicks on links)
+card.addEventListener("click", (e) => {
+  if (e.target.closest("a")) return;
+  card.classList.toggle("expanded");
 
+  const hint = card.querySelector(".eventHint");
+  if (hint) hint.textContent = card.classList.contains("expanded") ? "Tap to collapse" : "Tap to read more";
+});
           elEvents.appendChild(card);
         }
 
