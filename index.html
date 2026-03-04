@@ -248,18 +248,14 @@
   margin: 5px 0 0;
   color: var(--muted);
   font-weight:650;
-  overflow:hidden;
-  display:-webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  overflow: hidden;
   white-space: pre-wrap;
+  max-height: 72px;
+  transition: max-height 0.3s ease;
 }
 
 .eventCard.expanded .eventDesc{
-  overflow: visible;
-  display: block;
-  -webkit-line-clamp: unset;
-  white-space: pre-wrap; /* keep line breaks from calendar */
+  max-height: 1000px;
 }
 
 .eventHint{
