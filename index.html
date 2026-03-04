@@ -325,8 +325,15 @@
           background: white;
           padding: 0;
         }
-        .sectionTitle, .status, .controls, button, .badge, .qrText a{
+        .sectionTitle, .status, .controls, button, .badge, .qrText a, .eventHint{
           display:none !important;
+        }
+        .eventCard{
+          box-shadow: none;
+          border: 2px solid var(--bg1);
+        }
+        .eventDesc{
+          -webkit-line-clamp: 1;
         }
         .qrWrap{
           background: transparent;
