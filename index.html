@@ -13,16 +13,35 @@
 
     <style>
       :root{
-        --bg1:#1f6f6b;         /* teal-green */
-        --bg2:#d5a34d;         /* warm gold */
-        --card:#f6f2ea;        /* creamy */
-        --ink:#13202a;
-        --muted:#4d5b66;
-        --accent:#b64a3a;      /* warm red */
-        --accent2:#3d6fb6;     /* blue */
-        --shadow: 0 10px 30px rgba(0,0,0,.18);
-        --radius: 18px;
-      }
+  --bg1:#03849c;
+  --bg2:#03849c;
+
+  --card:#f6f2ea;
+
+  --ink:#4b216c;
+  --muted:#6a4a82;
+
+  --accent:#4b216c;
+  --accent2:#4b216c;
+
+  --shadow: 0 10px 30px rgba(0,0,0,.18);
+  --radius: 18px;
+}
+
+.logoRow{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo{
+  height:70px;
+  width:auto;
+  border-radius:8px;
+  background:white;
+  padding:4px;
+  box-shadow:0 6px 12px rgba(0,0,0,.15);
+}
 
       *{box-sizing:border-box}
       body{
@@ -30,9 +49,9 @@
         font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
         color:var(--ink);
         background:
-          radial-gradient(1100px 700px at 20% 10%, rgba(255,255,255,.10), transparent 60%),
-          radial-gradient(900px 600px at 90% 40%, rgba(255,255,255,.10), transparent 55%),
-          linear-gradient(160deg, var(--bg1) 0%, var(--bg1) 35%, var(--bg2) 100%);
+  radial-gradient(900px 500px at 20% 10%, rgba(255,255,255,.15), transparent 60%),
+  radial-gradient(700px 400px at 90% 40%, rgba(255,255,255,.12), transparent 60%),
+  linear-gradient(160deg, #03849c 0%, #03849c 40%, #026d82 100%);
         min-height:100vh;
         padding:24px;
       }
@@ -311,22 +330,28 @@
     <div class="page">
       <div class="sheet">
         <header>
-          <div class="brand">
-            <div class="badge">KINDER • EVENTS</div>
-            <div class="titleBox">
-              <h1 id="pageTitle">2026 Kinder Upcoming Events</h1>
-              <p class="subtitle" id="pageSubtitle">Live updates from our public calendar</p>
-            </div>
-          </div>
+  <div class="brand">
 
-          <div class="qrWrap">
-            <div id="qr" aria-label="QR code"></div>
-            <div class="qrText">
-              Subscribe<br />
-              <a class="link" id="subscribeLink" href="#" target="_blank" rel="noreferrer">Open calendar</a>
-            </div>
-          </div>
-        </header>
+    <div class="logoRow">
+      <img src="kinder-logo.jpg" class="logo" alt="Kallista Kindergarten logo">
+      <div class="badge">KINDER • EVENTS</div>
+    </div>
+
+    <div class="titleBox">
+      <h1 id="pageTitle">Kallista Kinder Upcoming Events</h1>
+      <p class="subtitle" id="pageSubtitle">Next events pulled live from our public calendar</p>
+    </div>
+
+  </div>
+
+  <div class="qrWrap">
+    <div id="qr"></div>
+    <div class="qrText">
+      Subscribe<br>
+      <a class="link" id="subscribeLink" href="#">Open calendar</a>
+    </div>
+  </div>
+</header>
 
         <div class="sectionTitle">
           <span>Upcoming Event Dates</span>
