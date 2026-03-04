@@ -640,15 +640,34 @@ function proxyCandidates(icsUrl) {
   }
 }
       function buildDateRange(start, end, allDay) {
-        if (allDay) {
-          // All-day end in ICS is often next-day exclusive; show just start date
-          return start.toLocaleDateString(undefined, { weekday: "short", year: "numeric", month: "short", day: "numeric" });
-        }
-        const d = start.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
-        const t1 = start.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
-        const t2 = end.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
-        return `${d} • ${t1}–${t2}`;
-      }
+  const dateFmt = { weekday: "short", year: "numeric", month: "short", day: "numeric" };
+
+  if (allDay) {
+    // Google ICS all-day events often have an "exclusive" DTEND (next day).
+    // For display, treat end as inclusive by subtracting 1 day when it spans multiple days.
+    const startDay = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    const endDayExclusive = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+    const dayMs = 24 * 60 * 60 * 1000;
+    const spanDays = Math.round((endDayExclusive - startDay) / dayMs);
+
+    // Single-day all-day event
+    if (spanDays <= 1) {
+      return start.toLocaleDateString(undefined, dateFmt);
+    }
+
+    // Multi-day all-day event: end is exclusive -> show inclusive end
+    const endInclusive = new Date(endDayExclusive.getTime() - dayMs);
+
+    return `${start.toLocaleDateString(undefined, dateFmt)} \u2192 ${endInclusive.toLocaleDateString(undefined, dateFmt)}`;
+  }
+
+  // Timed event (your existing style)
+  const d = start.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+  const t1 = start.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  const t2 = end.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  return `${d} \u2022 ${t1}\u2013${t2}`;
+}
 
       loadEvents();
     </script>
