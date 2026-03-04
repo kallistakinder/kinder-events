@@ -107,8 +107,8 @@
   border:1px solid rgba(255,255,255,.22);
 }
      #qr{
-  width:160px;
-  height:160px;
+  width:188px;
+  height:188px;
   background:white;
   padding:14px;
   border-radius:14px;
@@ -353,7 +353,7 @@
       // =======================
       // CONFIG (edit these)
       // =======================
-      const PROXY_URL = "https://api.allorigins.win/raw?url=https://calendar.google.com/calendar/ical/e22b74f5b0b5b1bb2dba879d3eff483eeadbbb95ebb18bc9ef7656df891c6427%40group.calendar.google.com/public/basic.ics";
+      const PROXY_URL = "https://calendar.google.com/calendar/ical/e22b74f5b0b5b1bb2dba879d3eff483eeadbbb95ebb18bc9ef7656df891c6427%40group.calendar.google.com/public/basic.ics";
       const SUBSCRIBE_URL =
         "https://calendar.google.com/calendar/u/0/r?cid=e22b74f5b0b5b1bb2dba879d3eff483eeadbbb95ebb18bc9ef7656df891c6427@group.calendar.google.com";
       const PAGE_TITLE = "Kallista Kinder Upcoming Events";
@@ -503,7 +503,26 @@
           "'": "&#39;"
         }[m]));
       }
+async function fetchWithTimeout(url, ms = 12000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal, cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.text();
+  } finally {
+    clearTimeout(t);
+  }
+}
 
+function proxyCandidates(icsUrl) {
+  // rotate between proxies; if one is down, next usually works
+  return [
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(icsUrl)}`,
+    `https://cors.isomorphic-git.org/${icsUrl}`, // often fast
+    `https://r.jina.ai/http://${icsUrl.replace(/^https?:\/\//, "")}`, // text proxy
+  ];
+}
       // =======================
       // Load + parse ICS
       // =======================
@@ -511,14 +530,24 @@
         try {
           elStatus.textContent = "Loading events…";
 
-          if (!PROXY_URL.includes("http")) {
-            throw new Error("Set PROXY_URL to your Cloudflare Worker URL.");
-          }
+          let icsText = null;
+let lastErr = null;
 
-          const res = await fetch(PROXY_URL, { cache: "no-store" });
-          if (!res.ok) throw new Error(`Proxy fetch failed: ${res.status}`);
+for (const url of proxyCandidates(ICS_URL)) {
+  try {
+    elStatus.textContent = "Loading events…";
+    icsText = await fetchWithTimeout(url, 12000);
+    if (icsText && icsText.includes("BEGIN:VCALENDAR")) break;
+  } catch (e) {
+    lastErr = e;
+  }
+}
 
-          const icsText = await res.text();
+if (!icsText || !icsText.includes("BEGIN:VCALENDAR")) {
+  throw new Error(
+    `Failed to fetch calendar feed (tried multiple proxies). ${lastErr ? lastErr.message : ""}`
+  );
+}
 
           const jcal = ICAL.parse(icsText);
           const comp = new ICAL.Component(jcal);
