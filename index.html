@@ -506,123 +506,139 @@
 async function fetchWithTimeout(url, ms = 12000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
+
   try {
     const res = await fetch(url, { signal: ctrl.signal, cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.text();
+    const text = await res.text();
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: ${text.slice(0, 120)}`);
+    }
+    if (!text.includes("BEGIN:VCALENDAR")) {
+      throw new Error(`Not an ICS response: ${text.slice(0, 120)}`);
+    }
+
+    return text;
   } finally {
     clearTimeout(t);
   }
 }
 
 function proxyCandidates(icsUrl) {
-  // rotate between proxies; if one is down, next usually works
   return [
     `https://api.allorigins.win/raw?url=${encodeURIComponent(icsUrl)}`,
-    `https://cors.isomorphic-git.org/${icsUrl}`, // often fast
-    `https://r.jina.ai/http://${icsUrl.replace(/^https?:\/\//, "")}`, // text proxy
+    // Jina can work, but sometimes adds wrapper text; keep it last
+    `https://r.jina.ai/http://${icsUrl.replace(/^https?:\/\//, "")}`,
   ];
 }
       // =======================
       // Load + parse ICS
       // =======================
-      async function loadEvents() {
-        try {
-          elStatus.textContent = "Loading events…";
-
-          let icsText = null;
-let lastErr = null;
-
-for (const url of proxyCandidates(ICS_URL)) {
+     async function loadEvents() {
   try {
     elStatus.textContent = "Loading events…";
-    icsText = await fetchWithTimeout(url, 12000);
-    if (icsText && icsText.includes("BEGIN:VCALENDAR")) break;
-  } catch (e) {
-    lastErr = e;
+
+    let icsText = null;
+    let lastErr = null;
+
+    // Try proxies until we get a real ICS payload
+    for (const url of proxyCandidates(ICS_URL)) {
+      try {
+        elStatus.textContent = "Loading events…";
+        icsText = await fetchWithTimeout(url, 12000);
+
+        // fetchWithTimeout SHOULD already verify this, but double-safety:
+        if (icsText && icsText.includes("BEGIN:VCALENDAR")) {
+          break;
+        } else {
+          icsText = null;
+          throw new Error("Response was not an ICS calendar");
+        }
+      } catch (e) {
+        lastErr = e;
+        icsText = null;
+      }
+    }
+
+    if (!icsText) {
+      throw new Error(
+        `Failed to fetch calendar feed. ${lastErr ? lastErr.message : ""}`
+      );
+    }
+
+    // Parse only once we've confirmed it's an ICS
+    const jcal = ICAL.parse(icsText);
+    const comp = new ICAL.Component(jcal);
+    const vevents = comp.getAllSubcomponents("vevent") || [];
+
+    const now = new Date();
+    const upcoming = [];
+
+    for (const v of vevents) {
+      const e = new ICAL.Event(v);
+
+      // Recurring expansion (next 12 months)
+      const iterator = e.iterator();
+      let next;
+      let safety = 0;
+
+      while ((next = iterator.next()) && safety++ < 500) {
+        const start = next.toJSDate();
+
+        // Only future (or today)
+        if (start < new Date(now.getTime() - 24 * 60 * 60 * 1000)) continue;
+
+        // Stop expanding too far (12 months)
+        const limit = new Date(now);
+        limit.setMonth(limit.getMonth() + 12);
+        if (start > limit) break;
+
+        const details = e.getOccurrenceDetails(next);
+        const occEvent = details.item;
+
+        const allDay = isAllDayEvent(occEvent);
+
+        const end = details.endDate.toJSDate();
+        const title = cleanText(occEvent.summary);
+        const description = cleanText(occEvent.description);
+        const location = cleanText(occEvent.location);
+
+        const dateRange = buildDateRange(start, end, allDay);
+
+        upcoming.push({
+          start,
+          end,
+          title: title || "(Untitled event)",
+          description,
+          location,
+          allDay,
+          dateRange,
+        });
+
+        // If not recurring, just take one
+        if (!e.isRecurring()) break;
+      }
+    }
+
+    upcoming.sort((a, b) => a.start - b.start);
+
+    allEvents = upcoming;
+    pageIndex = 0;
+    render();
+  } catch (err) {
+    console.error(err);
+    elStatus.textContent = "Couldn’t load events. Check calendar public access or try again shortly.";
+    elEvents.innerHTML = `
+      <div class="eventCard">
+        <div class="eventMain">
+          <h3 class="eventTitle">Couldn’t load events</h3>
+          <p class="eventDesc">${escapeHtml(String(err.message || err))}</p>
+          <p class="eventDesc">If this keeps happening, the free proxy may be down. We can switch to a GitHub Actions cached feed for reliability.</p>
+        </div>
+      </div>
+    `;
   }
 }
-
-if (!icsText || !icsText.includes("BEGIN:VCALENDAR")) {
-  throw new Error(
-    `Failed to fetch calendar feed (tried multiple proxies). ${lastErr ? lastErr.message : ""}`
-  );
-}
-
-          const jcal = ICAL.parse(icsText);
-          const comp = new ICAL.Component(jcal);
-          const vevents = comp.getAllSubcomponents("vevent") || [];
-
-          const now = new Date();
-          const upcoming = [];
-
-          for (const v of vevents) {
-            const e = new ICAL.Event(v);
-
-            // Handle recurring events: expand occurrences for next ~12 months (tweak if you want)
-            const iterator = e.iterator();
-            let next;
-            let safety = 0;
-
-            while ((next = iterator.next()) && safety++ < 500) {
-              const start = next.toJSDate();
-
-              // Only future (or today) events
-              if (start < new Date(now.getTime() - 24 * 60 * 60 * 1000)) continue;
-
-              // Stop expanding too far (12 months)
-              const limit = new Date(now);
-              limit.setMonth(limit.getMonth() + 12);
-              if (start > limit) break;
-
-              const details = e.getOccurrenceDetails(next);
-              const occEvent = details.item;
-
-              const allDay = isAllDayEvent(occEvent);
-
-              const end = details.endDate.toJSDate();
-              const title = cleanText(occEvent.summary);
-              const description = cleanText(occEvent.description);
-              const location = cleanText(occEvent.location);
-
-              const dateRange = buildDateRange(start, end, allDay);
-
-              upcoming.push({
-                start,
-                end,
-                title: title || "(Untitled event)",
-                description,
-                location,
-                allDay,
-                dateRange,
-              });
-
-              // If it’s not recurring, just take one
-              if (!e.isRecurring()) break;
-            }
-          }
-
-          // Sort by start date
-          upcoming.sort((a, b) => a.start - b.start);
-
-          allEvents = upcoming;
-          pageIndex = 0;
-          render();
-        } catch (err) {
-          console.error(err);
-          elStatus.textContent = "Couldn’t load events. Check PROXY_URL and calendar public access.";
-          elEvents.innerHTML = `
-            <div class="eventCard">
-              <div class="eventMain">
-                <h3 class="eventTitle">Couldn’t load events</h3>
-                <p class="eventDesc">${escapeHtml(String(err.message || err))}</p>
-                <p class="eventDesc">Make sure the calendar is public and the Worker URL is correct.</p>
-              </div>
-            </div>
-          `;
-        }
-      }
-
       function buildDateRange(start, end, allDay) {
         if (allDay) {
           // All-day end in ICS is often next-day exclusive; show just start date
