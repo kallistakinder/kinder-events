@@ -1,0 +1,39 @@
+name: Update calendar feed
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *" # every 30 minutes
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download ICS
+        run: |
+          set -e
+          URL="https://calendar.google.com/calendar/ical/e22b74f5b0b5b1bb2dba879d3eff483eeadbbb95ebb18bc9ef7656df891c6427%40group.calendar.google.com/public/basic.ics"
+          curl -L --fail --retry 5 --retry-delay 2 --connect-timeout 10 --max-time 30 \
+            -H "Accept: text/calendar" \
+            -o calendar.ics "$URL"
+
+          # Basic sanity check
+          grep -q "BEGIN:VCALENDAR" calendar.ics
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git status --porcelain | grep -q "calendar.ics"; then
+            git add calendar.ics
+            git commit -m "Update calendar.ics"
+            git push
+          else
+            echo "No changes."
+          fi
