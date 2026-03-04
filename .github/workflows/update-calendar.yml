@@ -3,7 +3,7 @@ name: Update calendar feed
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 * * *" # every 30 minutes
+    - cron: "20 * * * *" # every 30 minutes
 
 permissions:
   contents: write
