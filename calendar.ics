@@ -25,10 +25,71 @@ RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=1SU
 END:DAYLIGHT
 END:VTIMEZONE
 BEGIN:VEVENT
+DTSTART:20260321T220000Z
+DTEND:20260322T040000Z
+DTSTAMP:20260321T051410Z
+UID:34o64vuvp0rmbbp6c2p7mo3pdd@google.com
+CREATED:20260225T104555Z
+DESCRIPTION:<p>We’re holding a working bee to help refresh the playground w
+ ith new sand and soft fall (tan bark)\, and we’d love your help!</p><p>The 
+ main job will be wheelbarrowing sand and tan bark into the play areas from 
+ the car park and spreading it evenly. It’s a straightforward but hands-on t
+ ask — many hands will make light work.</p><p><strong>What to bring:</strong
+ ></p><ul><li><p>Gloves</p></li><li><p>Closed-toe shoes</p></li><li><p>Hat &
+ amp\; sunscreen (manifesting the sun)</p></li><li><p>Wheelbarrow (if you ha
+ ve one and can bring it)</p></li></ul><p>Children are welcome to attend.</p
+ ><p>Even an hour of your time makes a big difference to our kinder communit
+ y. Let’s get stuck in and improve the space for our kids to enjoy!</p>
+LAST-MODIFIED:20260225T104706Z
+LOCATION:Kallista Kindergarten\, 2 Church St\, Kallista VIC 3791\, Australi
+ a
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Kallista Kinder Working Bee
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20260519T230000Z
+DTEND:20260520T050000Z
+DTSTAMP:20260321T051410Z
+UID:2hlcsv68o19ihmnqjvol96807t@google.com
+CREATED:20260225T105920Z
+DESCRIPTION:<p>We’re excited to invite the special “grand people” in our ch
+ ildren’s lives to join us for a morning at kinder!</p><p>Grandpeoples Day i
+ s a chance for children to share their kinder world with someone important 
+ to them — this might be a grandparent\, great-grandparent\, older relative\
+ , family friend\, or another special adult who plays a grand role in their 
+ life.</p><p>On the day\, visitors will:</p><ul><li><p>Spend time playing al
+ ongside the children</p></li><li><p>See the learning spaces in action</p></
+ li><li><p>Join in activities and enjoy some shared moments together</p></li
+ ></ul><p>We recognise that every family looks different\, and not all child
+ ren have grandparents close by. Each child is welcome to invite a special o
+ lder adult who feels like a “grand person” to them.</p><p>We look forward t
+ o celebrating the wonderful connections across generations and the importan
+ t people who support and love our kinder kids. </p>
+LAST-MODIFIED:20260225T105920Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kallista Crayfish -  Grandpeoples day
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260420
+DTSTAMP:20260321T051410Z
+UID:2uksbin98l1r7ijtqebpq84881@google.com
+CREATED:20260225T104815Z
+LAST-MODIFIED:20260225T110516Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kallista Kinder T1 holidays
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 DTSTART;TZID=Australia/Melbourne:20260827T090000
 DTEND;TZID=Australia/Melbourne:20260827T150000
 RRULE:FREQ=DAILY;UNTIL=20260828T135959Z
-DTSTAMP:20260320T053906Z
+DTSTAMP:20260321T051410Z
 UID:26ge32falmbgidhs7kk18tq2ds@google.com
 CREATED:20260225T110950Z
 DESCRIPTION:<p>We’re celebrating Book Week at kinder and inviting children 
@@ -52,21 +113,132 @@ SUMMARY:Kallista Kinder Book Week! Dress as your fav character
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
-DTSTART;VALUE=DATE:20260627
-DTEND;VALUE=DATE:20260713
-DTSTAMP:20260320T053906Z
-UID:36b4co4bpu569lj8gqjtuiil2t@google.com
-CREATED:20260225T110506Z
-LAST-MODIFIED:20260225T110506Z
+DTSTART:20260520T230000Z
+DTEND:20260521T050000Z
+DTSTAMP:20260321T051410Z
+UID:7n4746e3g71uq6f141dr2st7bb@google.com
+CREATED:20260225T105935Z
+DESCRIPTION:<p>We’re excited to invite the special “grand people” in our ch
+ ildren’s lives to join us for a morning at kinder!</p><p>Grandpeoples Day i
+ s a chance for children to share their kinder world with someone important 
+ to them — this might be a grandparent\, great-grandparent\, older relative\
+ , family friend\, or another special adult who plays a grand role in their 
+ life.</p><p>On the day\, visitors will:</p><ul><li><p>Spend time playing al
+ ongside the children</p></li><li><p>See the learning spaces in action</p></
+ li><li><p>Join in activities and enjoy some shared moments together</p></li
+ ></ul><p>We recognise that every family looks different\, and not all child
+ ren have grandparents close by. Each child is welcome to invite a special o
+ lder adult who feels like a “grand person” to them.</p><p>We look forward t
+ o celebrating the wonderful connections across generations and the importan
+ t people who support and love our kinder kids. </p>
+LAST-MODIFIED:20260225T105938Z
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Kallista Skinks-  Grandpeoples day
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20261024T080000Z
+DTEND:20261024T120000Z
+DTSTAMP:20260321T051410Z
+UID:29qq8ij6kpnor2kl0lq7ibiej8@google.com
+CREATED:20260225T111620Z
+DESCRIPTION:<br><article dir="auto"><br><br><br><div dir="auto"><br><br><p>
+ Join us for a fun-filled trivia night to raise funds for our kinder!</p><p>
+ <strong>When:</strong> Saturday\, from 7:00pm onwards<br><strong>Where:</st
+ rong> Kallista Primary School Hall<br><strong>Theme:</strong> Movie Charact
+ ers (dress up encouraged!)</p><p>Enjoy trivia rounds\, games\, puzzles\, do
+ or prizes\, and a silent auction — all while supporting the kinder. Gather 
+ a team of 8 and come along for a great night out or meet new friends and be
+  placed on the night!<br><br>Tickets and childcare essential as this is an 
+ over 18 event.</p></article>
+LAST-MODIFIED:20260225T111637Z
+LOCATION:Kallista Primary School\, 72 Monbulk Rd\, Kallista VIC 3791\, Aust
+ ralia
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Kallista Kinder Trivia Night - Book in ya babysitting!
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Australia/Melbourne:20260518T090000
+DTEND;TZID=Australia/Melbourne:20260518T150000
+RRULE:FREQ=DAILY;UNTIL=20260522T135959Z
+DTSTAMP:20260321T051410Z
+UID:2ael7mqqcs8lg32f10np7a1hjq@google.com
+CREATED:20260225T105352Z
+DESCRIPTION:<p>Our kinder is hosting a Book Fair sponsored by Scholastic to
+  raise funds for new equipment and upgrades to benefit all of our children.
+ </p><p>Throughout the week\, a range of books will be available to purchase
+ . Brochures will be sent home and extra copies will be available at the kin
+ der for families to browse together and choose their favourites.</p><p><str
+ ong>How it works:</strong></p><ul><li><p>Browse the brochure with your chil
+ d and select any books you’d like to purchase.</p></li><li><p>Follow the or
+ dering instructions provided in the brochure.</p></li><li><p>Books will be 
+ delivered back to the kinder for distribution.</p></li></ul><p><strong>Ever
+ y purchase makes a difference — 100% of proceeds go directly to the kinder<
+ /strong>\, helping fund learning resources\, play equipment\, and improveme
+ nts to our environment.</p><p>Thank you for supporting our kinder and helpi
+ ng foster a love of reading while giving back to the community!<br></p>
+LAST-MODIFIED:20260225T105421Z
+LOCATION:Kallista Kindergarten\, 2 Church St\, Kallista VIC 3791\, Australi
+ a
 SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:Kallista Kinder T2 Holidays
+SUMMARY:Scholastic Book Fair – Support Kallista Kinder
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260824
+DTEND;VALUE=DATE:20260829
+DTSTAMP:20260321T051410Z
+UID:3pcngpu7gjrv023qq3e7nj1qv5@google.com
+CREATED:20260225T111101Z
+LAST-MODIFIED:20260225T111101Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Book Week
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20261106T220000Z
+DTEND:20261107T040000Z
+DTSTAMP:20260321T051410Z
+UID:31e8rh828db837dn4v3tgb1lcl@google.com
+CREATED:20260225T111749Z
+DESCRIPTION:<p>We’re planning another working bee to help keep our kinder l
+ ooking its best\, and we’d love your support!</p><p>The specific jobs are s
+ till being finalised and will be shared closer to the date\, but tasks may 
+ include general maintenance\, tidying outdoor areas\, small repairs\, and h
+ elping improve our learning spaces.</p><p><strong>What to bring (if you can
+ ):</strong></p><ul><li><p>Gloves</p></li><li><p>Closed-toe shoes</p></li><l
+ i><p>Weather appropriate attire</p></li><li><p>Any handy tools you’re happy
+  to use</p></li></ul><p>Children are welcome to attend but must be supervis
+ ed at all times.</p><p>Even if you can only stay for a short while\, your h
+ elp makes a big difference to our kinder community. Thank you for being par
+ t of it!</p>
+LAST-MODIFIED:20260225T111749Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kallista Kinder Working Bee – Save the Date
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260919
+DTEND;VALUE=DATE:20261005
+DTSTAMP:20260321T051410Z
+UID:6o2vdb1sv75bkah3jhfk93hjfk@google.com
+CREATED:20260225T111132Z
+LAST-MODIFIED:20260225T111132Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kallista Kinder T3 Holidays
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 DTSTART:20260612T060000Z
 DTEND:20260612T100000Z
-DTSTAMP:20260320T053906Z
+DTSTAMP:20260321T051410Z
 UID:4cdc5qstm46hqhqvtbr17kqo5i@google.com
 CREATED:20260225T110414Z
 DESCRIPTION:<p>Join us as we mark the Winter Solstice with a cosy community
@@ -95,159 +267,9 @@ SUMMARY:Kallista Kinder - Winter Solstice Event
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
-DTSTART:20260321T220000Z
-DTEND:20260322T040000Z
-DTSTAMP:20260320T053906Z
-UID:34o64vuvp0rmbbp6c2p7mo3pdd@google.com
-CREATED:20260225T104555Z
-DESCRIPTION:<p>We’re holding a working bee to help refresh the playground w
- ith new sand and soft fall (tan bark)\, and we’d love your help!</p><p>The 
- main job will be wheelbarrowing sand and tan bark into the play areas from 
- the car park and spreading it evenly. It’s a straightforward but hands-on t
- ask — many hands will make light work.</p><p><strong>What to bring:</strong
- ></p><ul><li><p>Gloves</p></li><li><p>Closed-toe shoes</p></li><li><p>Hat &
- amp\; sunscreen (manifesting the sun)</p></li><li><p>Wheelbarrow (if you ha
- ve one and can bring it)</p></li></ul><p>Children are welcome to attend.</p
- ><p>Even an hour of your time makes a big difference to our kinder communit
- y. Let’s get stuck in and improve the space for our kids to enjoy!</p>
-LAST-MODIFIED:20260225T104706Z
-LOCATION:Kallista Kindergarten\, 2 Church St\, Kallista VIC 3791\, Australi
- a
-SEQUENCE:1
-STATUS:CONFIRMED
-SUMMARY:Kallista Kinder Working Bee
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-DTSTART;TZID=Australia/Melbourne:20260518T090000
-DTEND;TZID=Australia/Melbourne:20260518T150000
-RRULE:FREQ=DAILY;UNTIL=20260522T135959Z
-DTSTAMP:20260320T053906Z
-UID:2ael7mqqcs8lg32f10np7a1hjq@google.com
-CREATED:20260225T105352Z
-DESCRIPTION:<p>Our kinder is hosting a Book Fair sponsored by Scholastic to
-  raise funds for new equipment and upgrades to benefit all of our children.
- </p><p>Throughout the week\, a range of books will be available to purchase
- . Brochures will be sent home and extra copies will be available at the kin
- der for families to browse together and choose their favourites.</p><p><str
- ong>How it works:</strong></p><ul><li><p>Browse the brochure with your chil
- d and select any books you’d like to purchase.</p></li><li><p>Follow the or
- dering instructions provided in the brochure.</p></li><li><p>Books will be 
- delivered back to the kinder for distribution.</p></li></ul><p><strong>Ever
- y purchase makes a difference — 100% of proceeds go directly to the kinder<
- /strong>\, helping fund learning resources\, play equipment\, and improveme
- nts to our environment.</p><p>Thank you for supporting our kinder and helpi
- ng foster a love of reading while giving back to the community!<br></p>
-LAST-MODIFIED:20260225T105421Z
-LOCATION:Kallista Kindergarten\, 2 Church St\, Kallista VIC 3791\, Australi
- a
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Scholastic Book Fair – Support Kallista Kinder
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-DTSTART;VALUE=DATE:20260824
-DTEND;VALUE=DATE:20260829
-DTSTAMP:20260320T053906Z
-UID:3pcngpu7gjrv023qq3e7nj1qv5@google.com
-CREATED:20260225T111101Z
-LAST-MODIFIED:20260225T111101Z
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Book Week
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-DTSTART:20260520T230000Z
-DTEND:20260521T050000Z
-DTSTAMP:20260320T053906Z
-UID:7n4746e3g71uq6f141dr2st7bb@google.com
-CREATED:20260225T105935Z
-DESCRIPTION:<p>We’re excited to invite the special “grand people” in our ch
- ildren’s lives to join us for a morning at kinder!</p><p>Grandpeoples Day i
- s a chance for children to share their kinder world with someone important 
- to them — this might be a grandparent\, great-grandparent\, older relative\
- , family friend\, or another special adult who plays a grand role in their 
- life.</p><p>On the day\, visitors will:</p><ul><li><p>Spend time playing al
- ongside the children</p></li><li><p>See the learning spaces in action</p></
- li><li><p>Join in activities and enjoy some shared moments together</p></li
- ></ul><p>We recognise that every family looks different\, and not all child
- ren have grandparents close by. Each child is welcome to invite a special o
- lder adult who feels like a “grand person” to them.</p><p>We look forward t
- o celebrating the wonderful connections across generations and the importan
- t people who support and love our kinder kids. </p>
-LAST-MODIFIED:20260225T105938Z
-SEQUENCE:1
-STATUS:CONFIRMED
-SUMMARY:Kallista Skinks-  Grandpeoples day
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-DTSTART;TZID=Australia/Melbourne:20260316T090000
-DTEND;TZID=Australia/Melbourne:20260316T150000
-RRULE:FREQ=DAILY;UNTIL=20260319T125959Z
-DTSTAMP:20260320T053906Z
-UID:7mvas1i91dt11v5igfj3uf5vvt@google.com
-CREATED:20260225T104316Z
-DESCRIPTION:<p>A professional photographer (Amber) will be visiting the kin
- der to take individual children’s photos during kinder sessions including b
- ush kinder from March 16th - 19th.</p><p><strong>Important:</strong> Photos
-  are <strong>not automatic</strong>. If you would like your child photograp
- hed\, you must complete Amber’s online booking form and make payment direct
- ly through her system.</p><p>When booking\, please provide:</p><ul><li><p>Y
- our child’s full name</p></li><li><p>The day(s) your child attends kinder</
- p></li><li><p>Your contact details</p></li><li><p>Confirmation of your sele
- cted package/payment</p></li></ul><p>Only children who are booked and paid 
- for through Amber’s online form will be photographed.</p><p>If you do not c
- omplete the booking form\, your child will not be included on the day.</p><
- p>Please complete your booking before the cut-off date to secure your spot.
- </p>
-LAST-MODIFIED:20260225T104606Z
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Kinder Photo Day – Bookings Required
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-DTSTART;VALUE=DATE:20260919
-DTEND;VALUE=DATE:20261005
-DTSTAMP:20260320T053906Z
-UID:6o2vdb1sv75bkah3jhfk93hjfk@google.com
-CREATED:20260225T111132Z
-LAST-MODIFIED:20260225T111132Z
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Kallista Kinder T3 Holidays
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-DTSTART:20261106T220000Z
-DTEND:20261107T040000Z
-DTSTAMP:20260320T053906Z
-UID:31e8rh828db837dn4v3tgb1lcl@google.com
-CREATED:20260225T111749Z
-DESCRIPTION:<p>We’re planning another working bee to help keep our kinder l
- ooking its best\, and we’d love your support!</p><p>The specific jobs are s
- till being finalised and will be shared closer to the date\, but tasks may 
- include general maintenance\, tidying outdoor areas\, small repairs\, and h
- elping improve our learning spaces.</p><p><strong>What to bring (if you can
- ):</strong></p><ul><li><p>Gloves</p></li><li><p>Closed-toe shoes</p></li><l
- i><p>Weather appropriate attire</p></li><li><p>Any handy tools you’re happy
-  to use</p></li></ul><p>Children are welcome to attend but must be supervis
- ed at all times.</p><p>Even if you can only stay for a short while\, your h
- elp makes a big difference to our kinder community. Thank you for being par
- t of it!</p>
-LAST-MODIFIED:20260225T111749Z
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Kallista Kinder Working Bee – Save the Date
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
 DTSTART:20260522T230000Z
 DTEND:20260523T050000Z
-DTSTAMP:20260320T053906Z
+DTSTAMP:20260321T051410Z
 UID:7ffd7ra6fbmoaaq9f84kqkoaaa@google.com
 CREATED:20260225T110119Z
 DESCRIPTION:<p>We’re planning another working bee to help keep our kinder l
@@ -267,9 +289,29 @@ SUMMARY:Kallista Kinder Working Bee
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20261202T053000Z
+DTEND:20261202T080000Z
+DTSTAMP:20260321T051410Z
+UID:23rsjlh1thbcm5gj2cc2tvv6c3@google.com
+CREATED:20260225T111930Z
+DESCRIPTION:<p>Get ready to dance! Join us for a fun\, kid-friendly Kinder 
+ Disco at Ferny Creek Hall.</p><p><strong>What to expect:</strong> Music\, d
+ ancing\, and plenty of fun with kinder friends.<br><strong>Please bring:</s
+ trong> A plate of food to share (nut-free\, please).</p><p>Children must be
+  supervised by their attending adult.</p><p>We look forward to a lively aft
+ ernoon/evening of music\, movement\, and community!</p>
+LAST-MODIFIED:20260225T111930Z
+LOCATION:Ferny Creek Recreation Reserve Hall\, Cnr Clarkmont & Hilton Rds\,
+  Sassafras VIC 3787\, Australia
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kallista Kinder Kids Disco
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20260822T230000Z
 DTEND:20260823T050000Z
-DTSTAMP:20260320T053906Z
+DTSTAMP:20260321T051410Z
 UID:20rn9buc6689308pahtveri6t4@google.com
 CREATED:20260225T110704Z
 DESCRIPTION:<p>We’re planning another working bee to help keep our kinder l
@@ -292,83 +334,41 @@ SUMMARY:Kallista Kinder Working Bee – Save the Date
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
-DTSTART:20260519T230000Z
-DTEND:20260520T050000Z
-DTSTAMP:20260320T053906Z
-UID:2hlcsv68o19ihmnqjvol96807t@google.com
-CREATED:20260225T105920Z
-DESCRIPTION:<p>We’re excited to invite the special “grand people” in our ch
- ildren’s lives to join us for a morning at kinder!</p><p>Grandpeoples Day i
- s a chance for children to share their kinder world with someone important 
- to them — this might be a grandparent\, great-grandparent\, older relative\
- , family friend\, or another special adult who plays a grand role in their 
- life.</p><p>On the day\, visitors will:</p><ul><li><p>Spend time playing al
- ongside the children</p></li><li><p>See the learning spaces in action</p></
- li><li><p>Join in activities and enjoy some shared moments together</p></li
- ></ul><p>We recognise that every family looks different\, and not all child
- ren have grandparents close by. Each child is welcome to invite a special o
- lder adult who feels like a “grand person” to them.</p><p>We look forward t
- o celebrating the wonderful connections across generations and the importan
- t people who support and love our kinder kids. </p>
-LAST-MODIFIED:20260225T105920Z
+DTSTART;VALUE=DATE:20260627
+DTEND;VALUE=DATE:20260713
+DTSTAMP:20260321T051410Z
+UID:36b4co4bpu569lj8gqjtuiil2t@google.com
+CREATED:20260225T110506Z
+LAST-MODIFIED:20260225T110506Z
 SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:Kallista Crayfish -  Grandpeoples day
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-DTSTART;VALUE=DATE:20260403
-DTEND;VALUE=DATE:20260420
-DTSTAMP:20260320T053906Z
-UID:2uksbin98l1r7ijtqebpq84881@google.com
-CREATED:20260225T104815Z
-LAST-MODIFIED:20260225T110516Z
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Kallista Kinder T1 holidays
+SUMMARY:Kallista Kinder T2 Holidays
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-DTSTART:20261024T080000Z
-DTEND:20261024T120000Z
-DTSTAMP:20260320T053906Z
-UID:29qq8ij6kpnor2kl0lq7ibiej8@google.com
-CREATED:20260225T111620Z
-DESCRIPTION:<br><article dir="auto"><br><br><br><div dir="auto"><br><br><p>
- Join us for a fun-filled trivia night to raise funds for our kinder!</p><p>
- <strong>When:</strong> Saturday\, from 7:00pm onwards<br><strong>Where:</st
- rong> Kallista Primary School Hall<br><strong>Theme:</strong> Movie Charact
- ers (dress up encouraged!)</p><p>Enjoy trivia rounds\, games\, puzzles\, do
- or prizes\, and a silent auction — all while supporting the kinder. Gather 
- a team of 8 and come along for a great night out or meet new friends and be
-  placed on the night!<br><br>Tickets and childcare essential as this is an 
- over 18 event.</p></article>
-LAST-MODIFIED:20260225T111637Z
-LOCATION:Kallista Primary School\, 72 Monbulk Rd\, Kallista VIC 3791\, Aust
- ralia
-SEQUENCE:1
-STATUS:CONFIRMED
-SUMMARY:Kallista Kinder Trivia Night - Book in ya babysitting!
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-DTSTART:20261202T053000Z
-DTEND:20261202T080000Z
-DTSTAMP:20260320T053906Z
-UID:23rsjlh1thbcm5gj2cc2tvv6c3@google.com
-CREATED:20260225T111930Z
-DESCRIPTION:<p>Get ready to dance! Join us for a fun\, kid-friendly Kinder 
- Disco at Ferny Creek Hall.</p><p><strong>What to expect:</strong> Music\, d
- ancing\, and plenty of fun with kinder friends.<br><strong>Please bring:</s
- trong> A plate of food to share (nut-free\, please).</p><p>Children must be
-  supervised by their attending adult.</p><p>We look forward to a lively aft
- ernoon/evening of music\, movement\, and community!</p>
-LAST-MODIFIED:20260225T111930Z
-LOCATION:Ferny Creek Recreation Reserve Hall\, Cnr Clarkmont & Hilton Rds\,
-  Sassafras VIC 3787\, Australia
+DTSTART;TZID=Australia/Melbourne:20260316T090000
+DTEND;TZID=Australia/Melbourne:20260316T150000
+RRULE:FREQ=DAILY;UNTIL=20260319T125959Z
+DTSTAMP:20260321T051410Z
+UID:7mvas1i91dt11v5igfj3uf5vvt@google.com
+CREATED:20260225T104316Z
+DESCRIPTION:<p>A professional photographer (Amber) will be visiting the kin
+ der to take individual children’s photos during kinder sessions including b
+ ush kinder from March 16th - 19th.</p><p><strong>Important:</strong> Photos
+  are <strong>not automatic</strong>. If you would like your child photograp
+ hed\, you must complete Amber’s online booking form and make payment direct
+ ly through her system.</p><p>When booking\, please provide:</p><ul><li><p>Y
+ our child’s full name</p></li><li><p>The day(s) your child attends kinder</
+ p></li><li><p>Your contact details</p></li><li><p>Confirmation of your sele
+ cted package/payment</p></li></ul><p>Only children who are booked and paid 
+ for through Amber’s online form will be photographed.</p><p>If you do not c
+ omplete the booking form\, your child will not be included on the day.</p><
+ p>Please complete your booking before the cut-off date to secure your spot.
+ </p>
+LAST-MODIFIED:20260225T104606Z
 SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:Kallista Kinder Kids Disco
+SUMMARY:Kinder Photo Day – Bookings Required
 TRANSP:OPAQUE
 END:VEVENT
 END:VCALENDAR
